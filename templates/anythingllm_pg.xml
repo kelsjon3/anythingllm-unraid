@@ -14,7 +14,7 @@
   </Overview>
   <Category>AI,Tools,Productivity</Category>
   <WebUI>http://[IP]:[PORT:3001]/</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/anythingllm-unraid/main/templates/anythingllm_pg.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/kelsjon3/anythingllm-unraid/main/templates/anythingllm_pg.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/master/images/logo.png</Icon>
   <ExtraParams/>
   <PostArgs/>
@@ -51,7 +51,7 @@
   </Data>
   <Environment>
     <Variable>
-      <Value>postgresql://llm_user:password@postgres:5432/anythingllm</Value>
+      <Value></Value>
       <Name>DATABASE_URL</Name>
       <Mode/>
     </Variable>
@@ -60,5 +60,12 @@
   <Config Name="Web UI Port" Target="3001" Default="3001" Mode="tcp" Description="Port for accessing the AnythingLLM Web UI." Type="Port" Display="always" Required="true"/>
   <Config Name="Storage Path" Target="/app/server/storage" Default="/mnt/user/appdata/anythingllm" Mode="rw" Description="Path for AnythingLLM to store its data (vector caches, etc.)." Type="Path" Display="always" Required="true"/>
   <Config Name="Env File Path" Target="/app/server/.env" Default="/mnt/user/appdata/anythingllm/.env" Mode="rw" Description="Path to the .env file. Create this file to set additional environment variables." Type="Path" Display="advanced" Required="false"/>
-  <Config Name="Database URL" Target="DATABASE_URL" Default="postgresql://llm_user:password@postgres:5432/anythingllm" Description="The connection URL for your PostgreSQL database. Ensure the user and database exist and the pgvector extension is enabled." Type="Variable" Display="always" Required="true"/>
+  
+  <Config Name="Postgres Host" Target="POSTGRES_HOST" Default="postgres" Description="Hostname or IP of your Postgres container/server." Type="Variable" Display="always" Required="true"/>
+  <Config Name="Postgres Port" Target="POSTGRES_PORT" Default="5432" Description="Port for your Postgres container/server." Type="Variable" Display="always" Required="true"/>
+  <Config Name="Postgres User" Target="POSTGRES_USER" Default="llm_user" Description="Username for your Postgres database." Type="Variable" Display="always" Required="true"/>
+  <Config Name="Postgres Password" Target="POSTGRES_PASSWORD" Default="password" Description="Password for your Postgres user." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Postgres Database" Target="POSTGRES_DB" Default="anythingllm" Description="Name of the Postgres database." Type="Variable" Display="always" Required="true"/>
+
+  <Config Name="Database URL" Target="DATABASE_URL" Default="postgresql://llm_user:password@postgres:5432/anythingllm" Description="IMPORTANT: Construct the full DATABASE_URL using the fields above and paste it here. Format: postgresql://USER:PASSWORD@HOST:PORT/DATABASE" Type="Variable" Display="always" Required="true"/>
 </Container> 

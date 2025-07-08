@@ -12,40 +12,38 @@ This template is designed for users who want to connect AnythingLLM to an existi
 
 ## Installation
 
-You can install this template in two ways:
-
-### Option 1: Add Template Repository (Recommended)
-
 1.  In your Unraid web UI, navigate to the **Docker** tab.
 2.  Click on **Template Repositories**.
-3.  Copy and paste the URL of this GitHub repository into one of the empty fields: `https://github.com/YOUR_GITHUB_USERNAME/anythingllm-unraid`
+3.  Copy and paste the URL of this GitHub repository into one of the empty fields: `https://github.com/kelsjon3/anythingllm-unraid`
 4.  Click **Save**.
 5.  Go back to the **Docker** tab and click **Add Container**.
 6.  You should now see `AnythingLLM-PG` in the template dropdown list.
 
-### Option 2: Manual XML
-
-1.  Open the `templates/anythingllm_pg.xml` file in this repository.
-2.  Copy the entire XML content.
-3.  In your Unraid web UI, go to the **Docker** tab and click **Add Container**.
-4.  Toggle the **XML View** switch in the top-right.
-5.  Paste the XML content into the text area and click **Save**.
-
 ## Configuration
+
+When you add the container, you will see several fields to configure the database connection.
+
+### Postgres Settings
+
+*   **Postgres Host**: The hostname or IP address of your PostgreSQL container. If it's a Docker container on the same Unraid server, you can usually use the container's name (e.g., `postgres`).
+*   **Postgres Port**: The port PostgreSQL is listening on (usually `5432`).
+*   **Postgres User**: Your PostgreSQL username.
+*   **Postgres Password**: The user's password.
+*   **Postgres Database**: The name of the database AnythingLLM will use.
 
 ### `DATABASE_URL`
 
-This is the most critical setting. You must provide the connection string for your PostgreSQL database. The format is:
+After filling in the fields above, you must manually construct the `DATABASE_URL` and paste it into this field. This is the final connection string that AnythingLLM will use.
+
+The required format is:
 
 `postgresql://<user>:<password>@<hostname>:<port>/<database>`
 
--   **user**: Your PostgreSQL username.
--   **password**: The user's password.
--   **hostname**: The hostname or IP address of your PostgreSQL container. If it's a Docker container on the same Unraid server, you can usually use the container's name (e.g., `postgres`).
--   **port**: The port PostgreSQL is listening on (usually `5432`).
--   **database**: The name of the database AnythingLLM will use.
+**Example:**
 
-**Example:** `postgresql://anythingllm_user:secret_password@postgres-db:5432/anythingllm`
+If you used the default values from the template, your `DATABASE_URL` would be:
+
+`postgresql://llm_user:password@postgres:5432/anythingllm`
 
 ### `.env` File
 
